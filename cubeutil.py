@@ -113,6 +113,7 @@ moves = {}
 for move_name in moves_list.keys():
 	moves[move_name] = move(*generate_moves(move_name))
 
+
 if __name__ == '__main__':
 	"""
 	for name, move in moves.items():
@@ -120,6 +121,16 @@ if __name__ == '__main__':
 		print(move)
 	"""
 	c = cube([i for i in range(8)],[0 for i in range(8)],[i for i in range(12)],[0 for i in range(12)])
+	# スクランブル
+	scramble = "L D2 R U2 L F2 U2 L F2 R2 B2 R U' R' U2 F2 R' D B' F2"
 	c.out()
+	# スクランブルを構成する操作を1手ずつ順に適用する
+	scrambled_state = cube([i for i in range(8)],[0 for i in range(8)],[i for i in range(12)],[0 for i in range(12)])
+	for move_name in scramble.split(" "):
+		move_state = moves[move_name]
+		scrambled_state.apply_move(move_state)
+	scrambled_state.out()
+	'''
 	c.apply_move(moves["R2"])
 	c.out()
+	'''
